@@ -1,0 +1,27 @@
+// Colors
+$background: #072B59;
+
+$white: #FFF;
+
+$primary: #6B9DE3;
+$secondary: #7FBDFA;
+$link-hover: #7FBDFA;
+
+// Padding
+$padding-2: 8px;
+$padding-3: 12px;
+$padding-4: 16px;
+
+// Radius
+$small-border-radius: 12px;
+
+@import "~bulma/bulma.sass";
+
+// Tiles
+.tile {
+    background-color: $white;
+    padding: $padding-3;
+    border-radius: $small-border-radius;
+}
+
+
