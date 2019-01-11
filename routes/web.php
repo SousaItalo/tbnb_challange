@@ -25,6 +25,10 @@ Route::get('/my-cleaners', 'HostController@myCleaners');
 Route::get('/get-my-cleaners', 'HostController@getMyCleaners');
 Route::get('/my-cleaners/{cleaner}', 'HostController@cleanerDetails');
 
+/** House Routes */
+Route::get('/new-house', 'HouseController@new');
+Route::post('/store-house', 'HouseController@store');
+
 /** Cleaner Routes */
 Route::get('/my-cleanings', 'CleanerController@myCleanings');
 Route::get('/my-customers', 'CleanerController@myCustomers');

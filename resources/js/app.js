@@ -30,6 +30,9 @@ Vue.component('house-list', require('./components/houses/HouseList.vue').default
 Vue.component('host-house-details', require('./components/houses/HostHouseDetails.vue').default);
 Vue.component('host-cleaner-details', require('./components/cleaners/HostCleanerDetails.vue').default);
 
+/** House Components */
+Vue.component('new-house', require('./components/houses/NewHouse.vue').default);
+
 /** Cleaner Components **/
 Vue.component('cleaner-cleaning-list', require('./components/cleaners/CleanerCleaningList.vue').default);
 Vue.component('cleaner-host-list', require('./components/hosts/CleanerHostList.vue').default);
