@@ -26,13 +26,6 @@ class HouseController extends Controller
     return view('houses.new');
   }
 
-  public function edit(House $house)
-  {
-    return view('houses.edit', [
-      'house' => $house,
-    ]);
-  }
-
   public function store(Request $request)
   {
     House::create([
@@ -42,5 +35,22 @@ class HouseController extends Controller
     ]);
 
     return redirect('/my-houses');
+  }
+
+  public function edit(House $house)
+  {
+    return view('houses.edit', [
+      'house' => $house,
+    ]);
+  }
+
+  public function update(Request $request)
+  {
+   $house = House::find($request->id);
+   $house->name = $request->name;
+   $house->address = $request->address;
+   $house->save();
+
+   return redirect('/my-houses');
   }
 }

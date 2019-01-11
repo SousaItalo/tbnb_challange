@@ -2037,6 +2037,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['csrf', 'id', 'name', 'address'],
@@ -2129,17 +2138,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['csrf', 'id', 'name', 'address'],
+  props: ['csrf', 'id', 'name', 'address', 'method'],
   data: function data() {
     return {
-      HouseName: '',
-      HouseAddress: ''
+      houseId: '',
+      houseName: '',
+      houseAddress: ''
     };
   },
   created: function created() {
-    this.HouseName = this.name;
-    this.HouseAddress = this.address;
+    this.houseName = this.name;
+    this.houseAddress = this.address;
+    this.houseId = this.id;
   }
 });
 
@@ -2211,6 +2224,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HouseForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HouseForm.vue */ "./resources/js/components/houses/HouseForm.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6697,7 +6716,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -6754,7 +6773,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -38804,9 +38823,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("house-form", {
-    attrs: { csrf: _vm.csrf, id: _vm.id, name: _vm.name, address: _vm.address }
-  })
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("Edit House")]),
+      _vm._v(" "),
+      _c("house-form", {
+        attrs: {
+          csrf: _vm.csrf,
+          id: _vm.id,
+          name: _vm.name,
+          address: _vm.address,
+          method: "PATCH"
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38917,18 +38950,18 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.HouseName,
-              expression: "HouseName"
+              value: _vm.houseName,
+              expression: "houseName"
             }
           ],
           attrs: { type: "text", name: "name" },
-          domProps: { value: _vm.HouseName },
+          domProps: { value: _vm.houseName },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.HouseName = $event.target.value
+              _vm.houseName = $event.target.value
             }
           }
         })
@@ -38946,29 +38979,41 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.HouseAddress,
-              expression: "HouseAddress"
+              value: _vm.houseAddress,
+              expression: "houseAddress"
             }
           ],
           attrs: { type: "text", name: "address" },
-          domProps: { value: _vm.HouseAddress },
+          domProps: { value: _vm.houseAddress },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.HouseAddress = $event.target.value
+              _vm.houseAddress = $event.target.value
             }
           }
         })
       ]),
       _vm._v(" "),
       _c("input", {
+        attrs: { type: "hidden", name: "id" },
+        domProps: { value: _vm.id }
+      }),
+      _vm._v(" "),
+      _c("input", {
         attrs: { type: "hidden", name: "_token" },
         domProps: { value: _vm.csrf }
       }),
       _vm._v(" "),
-      _c("button", [_vm._v("Create House")])
+      _vm.method == "PATCH"
+        ? _c("input", {
+            attrs: { type: "hidden", name: "_method" },
+            domProps: { value: _vm.method }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _c("button", [_vm._v("Submit")])
     ])
   ])
 }
@@ -39080,7 +39125,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("house-form", { attrs: { csrf: _vm.csrf } })
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("New House")]),
+      _vm._v(" "),
+      _c("house-form", { attrs: { csrf: _vm.csrf, method: "POST" } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

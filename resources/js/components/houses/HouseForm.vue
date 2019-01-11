@@ -3,30 +3,34 @@
     <form method="POST" action="/store-house">
         <div class="form-input">
           <label class="has-text-white" for="name">House Name:</label>
-          <input type="text" name="name" v-model="HouseName">
+          <input type="text" name="name" v-model="houseName">
         </div>
         <div class="form-input">
           <label class="has-text-white" for="address">Address:</label>
-          <input type="text" name="address" v-model="HouseAddress">
+          <input type="text" name="address" v-model="houseAddress">
         </div>
+        <input type="hidden" name="id" :value="id">
         <input type="hidden" name="_token" :value="csrf">
-        <button>Create House</button>
+        <input v-if="method == 'PATCH'" type="hidden" name="_method" :value="method">
+        <button>Submit</button>
       </form>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['csrf', 'id', 'name', 'address'],
+    props: ['csrf', 'id', 'name', 'address', 'method'],
     data() {
       return {
-        HouseName: '',
-        HouseAddress: '',
+        houseId: '',
+        houseName: '',
+        houseAddress: '',
       };
     },
     created() {
-      this.HouseName = this.name;
-      this.HouseAddress = this.address;
+      this.houseName = this.name;
+      this.houseAddress = this.address;
+      this.houseId = this.id;
     }
   }
 </script>

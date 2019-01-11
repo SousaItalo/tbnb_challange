@@ -1,5 +1,11 @@
 <template>
-  <house-form :csrf="csrf"></house-form>
+  <div>
+    <h1>New House</h1>
+    <house-form
+      :csrf="csrf"
+      method="POST"
+    />
+  </div>
 </template>
 
 <script>

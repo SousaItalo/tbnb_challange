@@ -1,5 +1,14 @@
 <template>
-  <house-form :csrf="csrf" :id="id" :name="name" :address="address"></house-form>
+  <div>
+    <h1>Edit House</h1>
+    <house-form
+      :csrf="csrf"
+      :id="id"
+      :name="name"
+      :address="address"
+      method="PATCH"
+    />
+  </div>
 </template>
 
 <script>

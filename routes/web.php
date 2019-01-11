@@ -29,6 +29,7 @@ Route::get('/my-cleaners/{cleaner}', 'HostController@cleanerDetails');
 Route::get('/new-house', 'HouseController@new');
 Route::get('/my-houses/{house}/edit', 'HouseController@edit');
 Route::post('/store-house', 'HouseController@store');
+Route::patch('/store-house', 'HouseController@update');
 
 /** Cleaner Routes */
 Route::get('/my-cleanings', 'CleanerController@myCleanings');
