@@ -2,12 +2,12 @@
   <div class="form">
     <form method="POST" action="/store-house">
         <div class="form-input">
-          <label class="has-text-white" for="Name">House Name:</label>
-          <input type="text" name="name" v-model="houseName">
+          <label class="has-text-white" for="name">House Name:</label>
+          <input type="text" name="name" v-model="HouseName">
         </div>
         <div class="form-input">
-          <label class="has-text-white" for="Address">Address:</label>
-          <input type="text" name="address" v-model="address">
+          <label class="has-text-white" for="address">Address:</label>
+          <input type="text" name="address" v-model="HouseAddress">
         </div>
         <input type="hidden" name="_token" :value="csrf">
         <button>Create House</button>
@@ -17,13 +17,17 @@
 
 <script>
   export default {
-    props: ['csrf', 'houseId'],
+    props: ['csrf', 'id', 'name', 'address'],
     data() {
       return {
-        houseName: '',
-        address: '',
+        HouseName: '',
+        HouseAddress: '',
       };
     },
+    created() {
+      this.HouseName = this.name;
+      this.HouseAddress = this.address;
+    }
   }
 </script>
 

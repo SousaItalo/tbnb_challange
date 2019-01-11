@@ -26,6 +26,13 @@ class HouseController extends Controller
     return view('houses.new');
   }
 
+  public function edit(House $house)
+  {
+    return view('houses.edit', [
+      'house' => $house,
+    ]);
+  }
+
   public function store(Request $request)
   {
     House::create([

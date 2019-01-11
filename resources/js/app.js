@@ -32,6 +32,7 @@ Vue.component('host-cleaner-details', require('./components/cleaners/HostCleaner
 
 /** House Components */
 Vue.component('new-house', require('./components/houses/NewHouse.vue').default);
+Vue.component('edit-house', require('./components/houses/EditHouse.vue').default);
 
 /** Cleaner Components **/
 Vue.component('cleaner-cleaning-list', require('./components/cleaners/CleanerCleaningList.vue').default);
