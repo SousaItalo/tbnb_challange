@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Cleaner;
 use App\Host;
 use App\House;
+use App\CleaningProject;
+Use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -130,7 +132,7 @@ class HostController extends Controller
 
     public function deleteCleanerConnection(Cleaner $cleaner)
     {
-      // Cancel cleaning projects
+      // TODO: Cancel cleaning projects
 
       // Dismiss from every Host's houses
       foreach(Auth::user()->host->houses as $house) {
@@ -170,15 +172,63 @@ class HostController extends Controller
 
     public function cleanerDetails(Request $request, Cleaner $cleaner)
     {
-        $cleaner->load('user');
-        $cleaner->load([
-            'houses' => function ($query) use ($request) {
-                $query->where('host_id', $request->user()->host->id);
-            }
-        ]);
+      $cleaner->load('user');
+      $cleaner->load([
+        'houses' => function ($query) use ($request) {
+          $query->where('host_id', $request->user()->host->id);
+        }
+      ]);
 
-        return view('cleaners.host-cleaner-details', [
-            'cleaner' => $cleaner
-        ]);
+      return view('cleaners.host-cleaner-details', [
+        'cleaner' => $cleaner
+      ]);
+    }
+
+    public function listCleaningProjects()
+    {
+      $cleanings = collect([]);
+
+      // For some reason ->merge() didn't work here
+      // personally I avoid nested loops, but since
+      //I'm looking at this project as an MVP that should be fine.
+
+      foreach(Auth::user()->host->houses as $house) {
+        foreach($house->cleanings as $cleaning) {
+          $cleanings->push([
+            'id' => $cleaning->id,
+            'houseName' => $house->name,
+            'houseAddress' => $house->address,
+            'cleanerName' => $cleaning->cleaner->name,
+            'start' => $cleaning->start,
+            'end' => $cleaning->end,
+          ]);
+        }
+      }
+
+      return view('hosts.cleaning-projects',[
+        'cleanings' => $cleanings,
+      ]);
+    }
+
+    public function newCleaningProject()
+    {
+      return view ('hosts.new-cleaning-project');
+    }
+
+    public function storeCleaningProject(Request $request) {
+      $start = substr((string)$request->start, 0, 10);
+      $end = substr((string)$request->start, 0, 10);
+
+      $start = Carbon::createFromTimestamp($start)->toDateTimeString();
+      $end = Carbon::createFromTimestamp($end)->toDateTimeString();
+
+      CleaningProject::create([
+        'house_id' => $request->house,
+        'cleaner_id' => $request->cleaner,
+        'start' => $start,
+        'end' => $end,
+      ]);
+
+      return redirect('hosts.cleaning-projects');
     }
 }

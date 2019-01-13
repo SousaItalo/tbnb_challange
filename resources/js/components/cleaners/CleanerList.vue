@@ -19,7 +19,7 @@
               </div>
                 <footer class="card-footer">
                   <a :href="`/my-cleaners/${cleaner.id}`" class="card-footer-item">Details</a>
-                  <a :href="`/delete-cleaner-connection/${cleaner.id}`" class="card-footer-item" @click="deleteCleaner">Delete</a>
+                  <a :href="`/delete-cleaner-connection/${cleaner.id}`" class="card-footer-item">Delete</a>
                 </footer>
             </div>
           </li>
@@ -42,11 +42,6 @@
       return {
         cleaners: []
       };
-    },
-    methods: {
-      deleteCleaner () {
-
-      }
     },
     created () {
       axios.get('/get-my-cleaners').then(response => {

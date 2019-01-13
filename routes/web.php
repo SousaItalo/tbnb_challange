@@ -27,6 +27,10 @@ Route::get('/my-houses/{house}/dismiss-cleaner/{cleaner}', 'HouseController@dism
 Route::get('/my-houses/{house}', 'HostController@houseDetails');
 Route::post('/my-houses/{house}/assign-cleaner','HouseController@assignCleaner');
 
+Route::get('/cleaning-projects', 'HostController@listCleaningProjects');
+Route::get('/new-cleaning-project', 'HostController@newCleaningProject');
+Route::post('/store-cleaning-project', 'HostController@storeCleaningProject');
+
 Route::get('/my-cleaners', 'HostController@myCleaners');
 Route::get('/my-cleaners/{cleaner}', 'HostController@cleanerDetails');
 Route::get('/cleaner-connection', 'HostController@newCleanerConnection');
