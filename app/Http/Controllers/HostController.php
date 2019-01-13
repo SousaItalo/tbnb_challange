@@ -6,6 +6,7 @@ use App\Cleaner;
 use App\Host;
 use App\House;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HostController extends Controller
 {
@@ -107,6 +108,37 @@ class HostController extends Controller
             }])->get();
 
         return response()->json($cleaners, 200);
+    }
+
+    public function newCleanerConnection(Request $request)
+    {
+      return view('hosts.new-cleaner-connection');
+    }
+
+    public function storeCleanerConnection(Request $request)
+    {
+      $availableCleaners = Auth::user()->host->availableCleaners();
+
+      foreach($availableCleaners as $cleaner) {
+        if($cleaner->user->email == $request->email) {
+          Auth::user()->host->cleaners()->attach($cleaner->id);
+        }
+      }
+
+      return view('hosts.my-cleaners');
+    }
+
+    public function deleteCleanerConnection(Cleaner $cleaner)
+    {
+      // Cancel cleaning projects
+
+      // Dismiss from every Host's houses
+      foreach(Auth::user()->host->houses as $house) {
+        $house->cleaners()->detach($cleaner->id);
+      }
+      // Delete Host + cleaner conn
+      Auth::user()->host->cleaners()->detach($cleaner->id);
+      return view('hosts.my-cleaners');
     }
 
     public function myHouses(Request $request)

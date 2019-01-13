@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div class="page-title-container">
-      <h1 class="title has-text-white has-text-weight-light has-text-centered">My Houses</h1>
+    <page-header title="My Houses">
       <a :href="`/new-house`">New House</a>
-    </div>
+    </page-header>
     <div class="columns is-mobile">
       <div class="column">
         <ul class="house-list">
@@ -18,6 +17,7 @@
               <footer class="card-footer">
                 <a :href="`/my-houses/${house.id}`" class="card-footer-item">Details</a>
                 <a :href="`/my-houses/${house.id}/edit`" class="card-footer-item">Edit</a>
+                <a :href="`/my-houses/${house.id}/manage-cleaners`" class="card-footer-item">Cleaners</a>
               </footer>
             </div>
           </li>
@@ -28,8 +28,13 @@
 </template>
 
 <script>
+  import PageHeader from '../layout/PageHeader.vue';
+
   export default {
     name: "HouseList",
+    components: {
+      PageHeader
+    },
     data () {
       return {
         houses: []

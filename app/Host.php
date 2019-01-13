@@ -38,6 +38,13 @@ class Host extends Model
         );
     }
 
+    public function availableCleaners()
+    {
+      $assignedCleaners = $this->cleaners;
+      $allCleaners = cleaner::all();
+      return $allCleaners->diff($assignedCleaners);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

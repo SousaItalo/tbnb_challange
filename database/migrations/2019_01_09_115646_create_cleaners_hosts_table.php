@@ -14,9 +14,12 @@ class CreateCleanersHostsTable extends Migration
     public function up()
     {
         Schema::create('cleaners_hosts', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('cleaner_id')->references('id')->on('cleaners');
             $table->integer('host_id')->references('id')->on('hosts');
+
+            // Make the combo of these two collumns the primary ID
+            $table->primary(['cleaner_id', 'host_id']);
+
             $table->timestamps();
         });
     }

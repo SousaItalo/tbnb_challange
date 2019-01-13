@@ -41,7 +41,6 @@ class User extends Authenticatable
     {
         return $this->hasOne(Host::class);
     }
-
     public function cleaner()
     {
         return $this->hasOne(Cleaner::class);

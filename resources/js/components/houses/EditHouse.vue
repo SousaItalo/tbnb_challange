@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Edit House</h1>
+    <page-header title="Edit House"/>
     <house-form
       :csrf="csrf"
       :id="id"
@@ -12,12 +12,14 @@
 </template>
 
 <script>
+  import PageHeader from '../layout/PageHeader.vue';
   import HouseForm from './HouseForm.vue';
 
   export default {
     props: ['csrf', 'id', 'name', 'address'],
     components: {
-      HouseForm
+      PageHeader,
+      HouseForm,
     },
     created() {
        axios.get('/get-my-houses').then(response => {

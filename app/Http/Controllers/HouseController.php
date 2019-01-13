@@ -53,4 +53,55 @@ class HouseController extends Controller
 
    return redirect('/my-houses');
   }
+
+  public function manageCleaners(House $house)
+  {
+    return view('houses.manage-cleaners',[
+      'house' => $house,
+    ]);
+  }
+
+  public function getCleanersByHouse(House $house)
+  {
+    $cleaners = $this->getCleanersCollection($house);
+    return response()->json($cleaners, 200);
+  }
+
+  public function dismissCleaner($house, $cleaner)
+  {
+    $house = House::find($house);
+    $house->cleaners()->detach($cleaner);
+
+    $cleaners = $this->getCleanersCollection($house);
+
+    return response()->json($cleaners, 200);
+  }
+
+  public function assignCleaner(Request $request, House $house)
+  {
+    $availableCleaners = Auth::user()->host->cleaners->diff($house->cleaners);
+
+    foreach ($availableCleaners as $cleaner) {
+      if ($cleaner->user->email == $request->email) {
+        $house->cleaners()->attach($cleaner->id);
+      }
+    }
+
+    // TODO: find better way of refresh the $house object
+    $cleaners = $this->getCleanersCollection(House::find($house->id));
+    return response()->json($cleaners, 200);
+  }
+
+  function getCleanersCollection(House $house)
+  {
+    $cleaners = collect([]);
+    foreach ($house->cleaners as $cleaner) {
+      $cleaners->push([
+        'id' => $cleaner->id,
+        'name' => $cleaner->user->name,
+        'email' => $cleaner->user->email,
+      ]);
+    }
+    return $cleaners;
+  }
 }
