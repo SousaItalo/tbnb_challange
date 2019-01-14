@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $isHost = isset($request->user()->host);
+        $isHost = isset(Auth::user()->host->id);
 
         return $isHost ? view('hosts.my-houses') : view('cleaners.my-cleanings');
     }

@@ -59,13 +59,15 @@
     },
     methods: {
       createCleaningProject() {
-        if ( this.end > this.start) {
+        if (this.end > this.start) {
           axios.post('/store-cleaning-project', {
             'house': this.houseId,
             'cleaner': this.cleanerId,
             'start': this.start,
             'end': this.end,
-          })
+          }).then((response) =>{
+            window.location = '/cleaning-projects';
+          });
         } else {
           alert('Select an ending time after the starting time');
         }

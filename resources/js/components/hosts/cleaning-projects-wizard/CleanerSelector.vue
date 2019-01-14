@@ -7,8 +7,8 @@
             <div class="card">
               <div class="card-content">
                 <div class="content">
-                  <p class="title is-size-5">{{ cleaner.name }}</p>
-                  <p class="subtitle is-size-6 has-text-grey">{{ cleaner.email }}</p>
+                  <p class="title is-size-5">{{ cleaner.user.name }}</p>
+                  <p class="subtitle is-size-6 has-text-grey">{{ cleaner.user.email }}</p>
                 </div>
               </div>
               <footer class="card-footer">
@@ -37,7 +37,7 @@ export default {
     }
   },
   created() {
-    axios.get(`/my-houses/${this.houseId}/cleaners`).then(response => {
+    axios.get(`/get-my-cleaners`).then(response => {
       console.log(response.data);
       this.cleaners = response.data;
     });

@@ -16,8 +16,9 @@
               </div>
               <footer class="card-footer">
                 <a :href="`/my-houses/${house.id}`" class="card-footer-item">Details</a>
-                <a :href="`/my-houses/${house.id}/edit`" class="card-footer-item">Edit</a>
                 <a :href="`/my-houses/${house.id}/manage-cleaners`" class="card-footer-item">Cleaners</a>
+                <a :href="`/my-houses/${house.id}/edit`" class="card-footer-item">Edit</a>
+                <a :href="`/my-houses/${house.id}/delete`" class="card-footer-item">Delete</a>
               </footer>
             </div>
           </li>

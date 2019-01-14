@@ -31,6 +31,7 @@ Vue.component('host-house-details', require('./components/houses/HostHouseDetail
 Vue.component('host-cleaner-details', require('./components/cleaners/HostCleanerDetails.vue').default);
 Vue.component('new-cleaner-connection', require('./components/cleaners/NewCleanerConnection.vue').default);
 Vue.component('cleaning-projects', require('./components/hosts/CleaningProjectsList.vue').default);
+Vue.component('cleaning-project-details', require('./components/hosts/CleaningProjectDetails.vue').default);
 Vue.component('new-cleaning-project', require('./components/hosts/NewCleaningProject.vue').default);
 
 /** House Components */
@@ -42,6 +43,9 @@ Vue.component('manage-cleaners', require('./components/houses/ManageCleaners.vue
 Vue.component('cleaner-cleaning-list', require('./components/cleaners/CleanerCleaningList.vue').default);
 Vue.component('cleaner-host-list', require('./components/hosts/CleanerHostList.vue').default);
 Vue.component('cleaner-host-details', require('./components/hosts/CleanerHostDetails.vue').default);
+Vue.component('cleaning-details', require('./components/cleaners/CleaningDetails.vue').default);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

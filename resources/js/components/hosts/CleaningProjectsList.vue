@@ -13,17 +13,13 @@
                 <div class="content">
                   <p class="title is-size-5">{{ cleaning.houseName }}</p>
                   <p class="subtitle is-size-6 has-text-grey">{{ cleaning.houseAddress }}</p>
-                  <span class="subtitle is-size-7 has-text-grey">{{ cleaning.cleanerName }}</span>
-                  <br/>
-                  <span class="subtitle is-size-7 has-text-grey"><strong>start:</strong>&nbsp;{{ cleaning.start }}</span>
-                  <br/>
-                  <span class="subtitle is-size-7 has-text-grey"><strong>end:</strong>&nbsp;{{ cleaning.end }}</span>
+                  <span class="subtitle is-size-7 has-text-grey"><strong>Cleaner:</strong> &nbsp; {{ cleaning.cleanerName }}</span>
                 </div>
               </div>
               <footer class="card-footer">
-                <a :href="`#`" class="card-footer-item">Details</a>
+                <a :href="`/host-cleaning-projects/${cleaning.id}`" class="card-footer-item">Details</a>
                 <a :href="`#`" class="card-footer-item">Edit</a>
-                <a :href="`#`" class="card-footer-item">Delete</a>
+                <a :href="`/host-cleaning-projects/${cleaning.id}/delete`" class="card-footer-item">Delete</a>
               </footer>
             </div>
           </li>
@@ -45,5 +41,7 @@
 </script>
 
 <style scoped>
-
+  li {
+    margin-bottom: 10px;
+  }
 </style>

@@ -18,19 +18,24 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 /** Host Routes */
-Route::get('/my-houses', 'HostController@myHouses');
 Route::get('/get-my-houses', 'HostController@getMyHouses');
-Route::get('/my-houses/{house}/edit', 'HouseController@edit');
-Route::get('/my-houses/{house}/cleaners', 'HouseController@getCleanersByHouse');
-Route::get('/my-houses/{house}/manage-cleaners', 'HouseController@manageCleaners');
-Route::get('/my-houses/{house}/dismiss-cleaner/{cleaner}', 'HouseController@dismissCleaner');
+Route::get('/my-houses', 'HostController@myHouses');
 Route::get('/my-houses/{house}', 'HostController@houseDetails');
+Route::get('/my-houses/{house}/edit', 'HouseController@edit');
+Route::get('/my-houses/{house}/delete', 'HouseController@deleteHouse');
+Route::get('/my-houses/{house}/cleaners', 'HouseController@getCleanersByHouse');
+Route::get('/my-houses/{house}/dismiss-cleaner/{cleaner}', 'HouseController@dismissCleaner');
 Route::post('/my-houses/{house}/assign-cleaner','HouseController@assignCleaner');
 
+/** Cleaning Project Routes */
 Route::get('/cleaning-projects', 'HostController@listCleaningProjects');
+Route::get('/host-cleaning-projects/{cleaningProject}', 'HostController@showCleaningProject');
+Route::get('/host-cleaning-projects/{cleaningProject}/delete', 'HostController@deleteCleaningProject');
 Route::get('/new-cleaning-project', 'HostController@newCleaningProject');
 Route::post('/store-cleaning-project', 'HostController@storeCleaningProject');
 
+/** Manage Cleaners Routes */
+Route::get('/my-houses/{house}/manage-cleaners', 'HouseController@manageCleaners');
 Route::get('/my-cleaners', 'HostController@myCleaners');
 Route::get('/my-cleaners/{cleaner}', 'HostController@cleanerDetails');
 Route::get('/cleaner-connection', 'HostController@newCleanerConnection');
@@ -45,5 +50,6 @@ Route::patch('/store-house', 'HouseController@update');
 
 /** Cleaner Routes */
 Route::get('/my-cleanings', 'CleanerController@myCleanings');
+Route::get('/my-cleanings/{cleaningProject}', 'CleanerController@cleaningDetails');
 Route::get('/my-customers', 'CleanerController@myCustomers');
 Route::get('/my-customers/{host}', 'CleanerController@customerDetails');

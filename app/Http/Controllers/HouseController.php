@@ -92,6 +92,18 @@ class HouseController extends Controller
     return response()->json($cleaners, 200);
   }
 
+  public function deleteHouse(House $house)
+  {
+    // Delete cleaning projects
+    foreach($house->cleanings as $cleaning) {
+      $cleaning->delete();
+    }
+    // Delete House
+    $house->delete();
+    // Redirect to Houses List
+    return redirect('/my-houses');
+  }
+
   function getCleanersCollection(House $house)
   {
     $cleaners = collect([]);

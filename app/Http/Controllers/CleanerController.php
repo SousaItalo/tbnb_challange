@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Cleaner;
 use App\Host;
 use App\House;
+use App\CleaningProject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CleanerController extends Controller
 {
@@ -62,6 +64,24 @@ class CleanerController extends Controller
 
     return view('hosts.cleaner-host-details', [
       'host' => $host
+    ]);
+  }
+
+  public function myCleanings()
+  {
+    $houses = House::whereHas('cleanings', function($query) {
+      $query->where('cleaner_id','=', Auth::user()->cleaner->id);
+    })->get();
+
+    return view('cleaners.my-cleanings', [
+      'houses' => $houses
+    ]);
+  }
+
+  public function cleaningDetails(CleaningProject $cleaningProject)
+  {
+    return view('cleaners.cleaning-details', [
+      'cleaning' => $cleaningProject
     ]);
   }
 }
