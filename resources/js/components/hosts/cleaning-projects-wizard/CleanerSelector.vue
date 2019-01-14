@@ -37,7 +37,7 @@ export default {
     }
   },
   created() {
-    axios.get(`/get-my-cleaners`).then(response => {
+    axios.get(`/my-houses/${this.houseId}/cleaners`).then(response => {
       console.log(response.data);
       this.cleaners = response.data;
     });

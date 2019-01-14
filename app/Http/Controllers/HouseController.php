@@ -63,7 +63,7 @@ class HouseController extends Controller
 
   public function getCleanersByHouse(House $house)
   {
-    $cleaners = $this->getCleanersCollection($house);
+    $cleaners = $house->cleaners()->with(['user'])->get();
     return response()->json($cleaners, 200);
   }
 
@@ -94,12 +94,13 @@ class HouseController extends Controller
 
   public function deleteHouse(House $house)
   {
+
     // Delete cleaning projects
-    foreach($house->cleanings as $cleaning) {
-      $cleaning->delete();
-    }
+    $house->cleanings()->delete();
+
     // Delete House
     $house->delete();
+
     // Redirect to Houses List
     return redirect('/my-houses');
   }

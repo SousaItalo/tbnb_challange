@@ -21,7 +21,7 @@
                     class="is-size-4 has-text-weight-light">- {{ cleaner.user.name }}</li>
             </ul>
 
-            <p class="has-text-grey has-text-weight-bold is-size-6">Next Cleaning</p>
+            <p v-if="!house.next_cleaning" class="has-text-grey has-text-weight-bold is-size-6">Next Cleaning</p>
 
             <p class="title is-size-4 has-text-weight-light" v-if="!house.next_cleaning">There are no cleanings scheduled for this house.</p>
         </div>

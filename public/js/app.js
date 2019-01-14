@@ -2366,7 +2366,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get("/get-my-cleaners").then(function (response) {
+    axios.get("/my-houses/".concat(this.houseId, "/cleaners")).then(function (response) {
       console.log(response.data);
       _this.cleaners = response.data;
     });
@@ -40684,9 +40684,13 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _c("p", { staticClass: "has-text-grey has-text-weight-bold is-size-6" }, [
-        _vm._v("Next Cleaning")
-      ]),
+      !_vm.house.next_cleaning
+        ? _c(
+            "p",
+            { staticClass: "has-text-grey has-text-weight-bold is-size-6" },
+            [_vm._v("Next Cleaning")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       !_vm.house.next_cleaning
         ? _c("p", { staticClass: "title is-size-4 has-text-weight-light" }, [
